@@ -2,6 +2,7 @@
 Quantitatively Evaluate Spatial Efficiency in patient-to-clinic scheduling across In-state (GA) Clinics.
 <img width="1312" height="737" alt="Screenshot 2025-10-27 at 5 23 35 PM" src="https://github.com/user-attachments/assets/772c3270-9ffd-455b-81b9-2a619c0330fd" />
 
+https://app.powerbi.com/view?r=eyJrIjoiODkwMjIzMDItMjA4MS00NmY2LWE4NzUtY2EzY2NhNDkzNzY1IiwidCI6IjljZjYyODBiLTg1NWYtNGY5Ni1iZDJiLTU1Y2MzMjBkNmJhYyIsImMiOjJ9
 
 ## Executive Summary
 
