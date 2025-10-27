@@ -1,0 +1,29 @@
+# Data Extraction
+## Raw Appointment Data
+```sql
+SELECT person_nbr AS [Patient ID],
+location_name AS [Location],
+appt_date AS [Appointment Date],
+sub.create_timestamp AS [Created Time],
+p.zip AS [Home],
+LEFT(lm.zip, 5) AS [Clinic],
+appt_kept_ind AS [Appointment Status],
+p.state AS [Home State] FROM(
+
+  SELECT
+    person_id,
+    location_id,
+    appt_date,
+    create_timestamp,
+    appt_kept_ind,
+    ROW_NUMBER() OVER (
+      PARTITION BY person_id
+      ORDER BY create_timestamp ASC
+    ) AS rn
+  FROM appointments
+  WHERE appt_type = 'U'
+) sub
+LEFT JOIN person p ON p.person_id = sub.person_id
+LEFT JOIN location_mstr lm ON lm.location_id = sub.location_id
+WHERE rn = 1 AND person_nbr is not null AND YEAR(appt_date)>2022;
+```
