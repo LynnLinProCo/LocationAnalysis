@@ -7,6 +7,8 @@ Quantitatively Evaluate Spatial Efficiency in patient-to-clinic scheduling acros
 
 This study examines whether patients are being scheduled at the geographically optimal clinics and how travel distance affects appointment adherence. Using cleaned geospatial data from 2023–2025, we found that only 62.09% of patients were assigned to their nearest clinic, with an average optimal travel distance of 9.17 km (5.70 miles). A preliminary Pearson correlation analysis revealed that distance had a negligible influence on appointment attendance from 2023–2025 (R² = 0.044), but this relationship strengthened to a moderate R² = 0.3495 in 2025 alone, suggesting that historical data may obscure present-day behavioral trends. 
 
+Note: 9.17 km is a theoretical lower bound → “If every patient went to their nearest clinic, the average trip would be 9.17 km.” The current real average is 14.02 km, which is about 8.7 miles. 
+
 | **R² Range** | **Strength of Relationship** | **Interpretation** |
 |---------------|-------------------------------|--------------------|
 | 0.00 – 0.10 | Very Weak | Distance has almost no effect; other factors dominate. |
@@ -60,8 +62,17 @@ Algorithm: k-Nearest Neighbor search via cKDTree (SciPy)
 
 Each patient’s home coordinates were compared against all unique clinic coordinates.
 The cKDTree structure allows O(log n) nearest neighbor searches, efficiently identifying the closest clinic.
-
 For each patient i:
 <img width="369" height="55" alt="image" src="https://github.com/user-attachments/assets/421247a3-f1ef-47ab-bcda-f0903fa6a818" />
 
 Distances were calculated geodesically (WGS84 ellipsoid) via Geopy to yield accurate kilometer-based values.
+## 3. Interpretation
+
+The 62.09 % OSR indicates that 37.91 % of patients could be reassigned to a closer clinic through 23-25, suggesting potential inefficiencies in scheduling algorithms or possible capacity overloads. The 9.17 km mean nearest-clinic distance establishes a geographic benchmark for expected patient travel radius in GA.
+
+## 4. Recommendations for Next Steps
+
+Conduct cluster density analysis (K-Means or DBSCAN) to validate whether clinic locations align with patient population centers.
+
+Implement load balancing metrics to prevent overutilization of geographically central clinics.
+
