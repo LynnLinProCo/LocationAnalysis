@@ -50,4 +50,17 @@ Ensure all records reflect valid, geospatially mappable entities within GA.
 **Overall Error Rate:** `5.16%`
 
 The 5.16% error rate primarily results from incomplete or malformed demographic data. When integrating demographic data from the NexGen system via SQL scripts, validation should occur at the **data entry** or **ETL** stage.  
+
+
+## 2. Nearest-Clinic Distance Computation
+
+Algorithm: k-Nearest Neighbor search via cKDTree (SciPy)
 <img width="1313" height="736" alt="Screenshot 2025-10-27 at 5 23 26 PM" src="https://github.com/user-attachments/assets/0836b29a-b667-41e0-87c0-33963ca57507" />
+
+
+Each patient’s home coordinates were compared against all unique clinic coordinates.
+The cKDTree structure allows O(log n) nearest neighbor searches, efficiently identifying the closest clinic.
+
+For each patient i:
+<img width="369" height="55" alt="image" src="https://github.com/user-attachments/assets/421247a3-f1ef-47ab-bcda-f0903fa6a818" />
+Distances were calculated geodesically (WGS84 ellipsoid) via Geopy to yield accurate kilometer-based values.
