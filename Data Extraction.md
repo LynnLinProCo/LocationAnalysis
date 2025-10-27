@@ -31,6 +31,42 @@ LEFT JOIN person p ON p.person_id = sub.person_id
 LEFT JOIN location_mstr lm ON lm.location_id = sub.location_id
 WHERE rn = 1 AND person_nbr is not null AND YEAR(appt_date)>2022;
 ```
-## Wrangled Data Power BI Scripting
+
 ## Getting Longitude and Latitude data via Webscrapping
+```power bi
+let
+    Source = (zip as text) =>
+        let
+            url = "https://nominatim.openstreetmap.org/search?country=us&postalcode=" & zip & "&format=json",
+            response = Json.Document(Web.Contents(url, [Headers=[#"User-Agent"="PowerBI-Geocoder"]])),
+            first = if List.Count(response) > 0 then response{0} else null,
+            lat = if first <> null then first[lat] else null,
+            lon = if first <> null then first[lon] else null,
+            result = if first <> null then [Zip=zip, Latitude=lat, Longitude=lon] else [Zip=zip, Latitude=null, Longitude=null]
+        in
+            result
+in
+    Source
+```
+After making the above query to make a function, invoke the function in the original data query:
+```power bi
+   #"Added Custom1" = Table.AddColumn(#"Added Custom", "Clinic Edit", each fnGetLatLon([Clinic])),
+```
 ## Calculating distance
+```DAX
+let
+    R = 6371,  // Earth's radius in km
+    lat1 = [Home Edit.Latitude] * Number.PI / 180,
+    lon1 = [Home Edit.Longitude] * Number.PI / 180,
+    lat2 = [Clinic Edit.Latitude] * Number.PI / 180,
+    lon2 = [Clinic Edit.Longitude] * Number.PI / 180,
+    dLat = lat2 - lat1,
+    dLon = lon2 - lon1,
+    a = Number.Sin(dLat / 2) * Number.Sin(dLat / 2) +
+        Number.Cos(lat1) * Number.Cos(lat2) *
+        Number.Sin(dLon / 2) * Number.Sin(dLon / 2),
+    c = 2 * Number.Atan2(Number.Sqrt(a), Number.Sqrt(1 - a)),
+    distance = R * c
+in
+    distance
+```
