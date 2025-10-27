@@ -1,5 +1,7 @@
 # Location Analysis
 Quantitatively Evaluate Spatial Efficiency in patient-to-clinic scheduling across In-state (GA) Clinics.
+<img width="1312" height="737" alt="Screenshot 2025-10-27 at 5 23 35 PM" src="https://github.com/user-attachments/assets/772c3270-9ffd-455b-81b9-2a619c0330fd" />
+
 
 ## Executive Summary
 
@@ -48,3 +50,4 @@ Ensure all records reflect valid, geospatially mappable entities within GA.
 **Overall Error Rate:** `5.16%`
 
 The 5.16% error rate primarily results from incomplete or malformed demographic data. When integrating demographic data from the NexGen system via SQL scripts, validation should occur at the **data entry** or **ETL** stage.  
+<img width="1313" height="736" alt="Screenshot 2025-10-27 at 5 23 26 PM" src="https://github.com/user-attachments/assets/0836b29a-b667-41e0-87c0-33963ca57507" />
