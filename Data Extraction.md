@@ -1,4 +1,6 @@
 # Data Extraction
+Relational data queries. A raw data file extracts appointment records without historical context, while a wrangled data file links to the raw data to enable visualizations: 1) patient paths, distribution, and travel distance; 2) central heatmap showing clinic congestion.
+
 ## Raw Appointment Data
 ```sql
 SELECT person_nbr AS [Patient ID],
@@ -27,3 +29,6 @@ LEFT JOIN person p ON p.person_id = sub.person_id
 LEFT JOIN location_mstr lm ON lm.location_id = sub.location_id
 WHERE rn = 1 AND person_nbr is not null AND YEAR(appt_date)>2022;
 ```
+## Wrangled Data Power BI Scripting
+## Getting Longitude and Latitude data via Webscrapping
+## Calculating distance
