@@ -63,4 +63,5 @@ The cKDTree structure allows O(log n) nearest neighbor searches, efficiently ide
 
 For each patient i:
 <img width="369" height="55" alt="image" src="https://github.com/user-attachments/assets/421247a3-f1ef-47ab-bcda-f0903fa6a818" />
+
 Distances were calculated geodesically (WGS84 ellipsoid) via Geopy to yield accurate kilometer-based values.
