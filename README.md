@@ -79,7 +79,7 @@ Implement load balancing metrics to prevent overutilization of geographically ce
 
 **Feature selections: Before analysis, identify and evaluate key metrics that may influence appointment adherence and collection ratio. Segment the data by case type to isolate variables with genuine predictive impact.**
 ## 5. Considerations
-The current study serve as exploratory analysis. Thus, weakness of the model is purely estimating how we are doing instead of optimizing. 
+The current study serve as exploratory analysis. Thus, weakness of the model is ignored to priortize estimating performance instead of optimizing the model. 
 1) **Outliers**: Extreme cases such as patients recorded far from their assigned clinic (e.g., Mephesis to Atlanta) or those with home addresses set to the clinic itself introduce skew into the distance distribution. These anomalies likely represent data-entry or test records and can degrade model accuracy by biasing mean distance and correlation estimates
 2) **Multicollinearity**: Although distance is currently modeled as the only predictor, variables such as regional density, clinic proximity clusters, or ZIP-level socioeconomic indices may be highly correlated with distance. These overlapping predictors could inflate variance and obscure the unique contribution of distance once included in a multivariable model.
 3) **Heteroskedasticity**: Uneven urban planning and traffic congestion introduce unequal variance in the effect of distance on attendance. As travel distance no longer linearly reflects actual accessibility, the predictor becomes non-normally distributed, weakening its predictive validity and violating constant variance assumptions.
